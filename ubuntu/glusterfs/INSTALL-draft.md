@@ -59,9 +59,11 @@ gluster volume status gfs
 gluster volume info gfs
 ```
 
-Authorize nodes
+Authorize nodes (Replace IP addressess)
 
-`gluster volume set gfs auth.allow 10.0.0.2,10.0.0.3,10.0.0.4`
+``` bash
+gluster volume set gfs auth.allow 10.0.0.2,10.0.0.3,10.0.0.4
+```
 
 Mount the glusterFS volume where applications can access the files
 ``` bash
