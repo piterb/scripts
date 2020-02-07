@@ -8,3 +8,6 @@
 
 ### Example
 `docker service create -p 80:80 --name php5_superobedsk --network php5 --mount type=bind,source=/mnt/gluster/myweb/www,destination=/var/www/myweb --config source="000-default-myweb.conf",target="/etc/apache2/sites-available/000-default.conf",mode=0644 --replicas=3 php:7.2-apache`
+
+## Add mysql server
+docker run -d --network php5 --name=mysql56-1 -v /mnt/gluster/superobed/mysql:/etc/mysql/conf.d --env="MYSQL_ROOT_PASSWORD=Hprem_767" --env="MYSQL_PASSWORD=Hprem_767" --env="MYSQL_DATABASE=superobedsk1" mysql:5.6
