@@ -5,14 +5,11 @@
 
 ## Add web server
 
-``` bash
-docker run -d -p <port_in_host>:<port_in_container> --network <network_name> --name=<container_name> -v <apache2_sites_config_folder>:/etc/apache2/sites-available -v <webroot_on_host>:<web_root_container>  <image>
-```
+`docker run -d -p <port_in_host>:<port_in_container> --network <network_name> --name=<container_name> -v <apache2_sites_config_folder>:/etc/apache2/sites-available -v <webroot_on_host>:<web_root_container>  <image>`
 
 ### Example
-``` bash
-docker run -d -p 80:80 --network php5 --name=php5_app1 -v /mnt/gluster/myweb/apache2:/etc/apache2/sites-available -v /mnt/gluster/myweb/www:/var/www/myweb  php:7.2-apache
-```
+
+`docker run -d -p 80:80 --network php5 --name=php5_app1 -v /mnt/gluster/myweb/apache2:/etc/apache2/sites-available -v /mnt/gluster/myweb/www:/var/www/myweb  php:7.2-apache`
 
 ## Add web server service
 `docker service create -p <port_in_host>:<port_in_container> --name <service_name> --network <network_name> --mount type=bind,source=<host_folder>,destination=<container_folder> --config source="<config_name_in_registry>",target="<config_path_in_container>",mode=<permissions> --replicas=<number_of_replicas> <image>`
