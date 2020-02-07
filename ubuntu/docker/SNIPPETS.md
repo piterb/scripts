@@ -16,7 +16,13 @@ nimmis/apache-php5:latest
 `docker run -d --network <network_name> --name=<container_name> -v <host_folder>:<container_folder> --env="MYSQL_ROOT_PASSWORD=<root_password>" --env="MYSQL_PASSWORD=<mysql_password>" --env="MYSQL_DATABASE=<database_to_create>"<image>`
 
 ### Example
-`docker run -d --network mynetwork --name=mysql56 -v /mnt/gluster/mydb/mysql:/etc/mysql/conf.d --env="MYSQL_ROOT_PASSWORD=change_me" --env="MYSQL_PASSWORD=change_me" --env="MYSQL_DATABASE=mydb1" latest`
+`docker run -d --network mynetwork --name=mysqldb -v /mnt/gluster/mydb/mysql:/etc/mysql/conf.d --env="MYSQL_ROOT_PASSWORD=change_me" --env="MYSQL_PASSWORD=change_me" --env="MYSQL_DATABASE=mydb1" latest`
 
 ### Legacy images
 mysql:5.6
+
+## Import data to mysql
+`docker exec -i <container_name> mysql -u<user_name> -p<password> <db_name> < <path_to_sql>`
+
+### Example
+`docker exec -i mysqldb mysql -uroot -pRoot123 mydb1 < /mnt/gluster/mydb/mydb1.sql`
