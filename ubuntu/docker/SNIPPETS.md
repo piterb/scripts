@@ -26,3 +26,9 @@ mysql:5.6
 
 ### Example
 `docker exec -i mysqldb mysql -uroot -pRoot123 mydb1 < /mnt/gluster/mydb/mydb1.sql`
+
+## Add phpMyAdmin
+`docker run --name <container_name> --network <network_name> -d -e PMA_HOST=<mysql_server_address> -e PMA_ARBITRARY=1 -p <port_on_host>:<port_in_container> phpmyadmin/phpmyadmin`
+
+### Example
+`docker run --name phpmyadmin_app1 --network app1 -d -e PMA_HOST=10.0.0.10 -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin/phpmyadmin`
