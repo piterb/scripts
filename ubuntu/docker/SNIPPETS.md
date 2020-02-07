@@ -12,10 +12,12 @@
 `docker run -d -p 80:80 --network php5 --name=php5_app1 -v /mnt/gluster/myweb/apache2:/etc/apache2/sites-available -v /mnt/gluster/myweb/www:/var/www/myweb  php:7.2-apache`
 
 ## Add web server service
-`docker service create -p <port_in_host>:<port_in_container> --name <service_name> --network <network_name> --mount type=bind,source=<host_folder>,destination=<container_folder> --config source="<config_name_in_registry>",target="<config_path_in_container>",mode=<permissions> --replicas=<number_of_replicas> <image>`
+`docker service create -p <port_in_host>:<port_in_container> --name <service_name> --network <network_name> --mount type=bind,source=<host_folder>,destination=<container_folder> --config source="<config_name_in_registry>",target="<config_path_in_container>",mode=<permissions> --replicas=<number_of_replicas> --constraint node.labels.<label_name>==<label_value>  <image>`
 
 ### Example
-`docker service create -p 80:80 --name php5_superobedsk --network php5 --mount type=bind,source=/mnt/gluster/myweb/www,destination=/var/www/myweb --config source="000-default-myweb.conf",target="/etc/apache2/sites-available/000-default.conf",mode=0644 --replicas=3 php:7.2-apache`
+`docker service create -p 80:80 --name php5_superobedsk --network php5 --mount type=bind,source=/mnt/gluster/myweb/www,destination=/var/www/myweb --config source="000-default-myweb.conf",target="/etc/apache2/sites-available/000-default.conf",mode=0644 --replicas=3 --constraint node.labels.type==web php:7.2-apache`
+
+Constraint `--constraint node.labels.type==web` means, that replicas will be deployed on nodes with label `type==web` .
 
 ### Legacy images
 nimmis/apache-php5:latest
